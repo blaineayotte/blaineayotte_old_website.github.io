@@ -23,6 +23,7 @@ header {
 }
 
 header a:link {
+  width: 100px
   color: #ccc;
   text-decoration: none;
 }
