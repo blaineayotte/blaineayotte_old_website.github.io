@@ -14,7 +14,7 @@ header {
   font-family: sans-serif;
   font-weight: 300;
   font-size: 17px;
-  padding: 20px 0;
+  padding: 50px 0;
 }
 
 .menu {
@@ -23,7 +23,6 @@ header {
 }
 
 header a:link {
-  width: 100px
   color: #ccc;
   text-decoration: none;
 }
