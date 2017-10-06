@@ -41,6 +41,10 @@ header li {
   list-style: none;
   text-align: center;
 }
+header li2 {
+  list-style: none;
+  text-align: left;
+}
 
 .selected {
   background-color: #999;

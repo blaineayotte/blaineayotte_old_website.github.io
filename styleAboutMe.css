@@ -42,6 +42,11 @@ header li {
   text-align: center;
 }
 
+header li2 {
+  list-style: none;
+  text-align: left;
+}
+
 .selected {
   background-color: #888;
   border-radius: 25px;
@@ -96,7 +101,13 @@ header li {
   margin-top: 6px;
   color: #252833;
 }
-
+.bodyElement li2, .bodyElement p {
+  font-size: 17px;
+  font-weight: bold;
+  list-style: none;
+  margin-top: 6px;
+  color: #252833;
+}
 .bodyElement img {
   border-radius: 25px;
   display: inline-block;
