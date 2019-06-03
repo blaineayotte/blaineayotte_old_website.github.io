@@ -1,0 +1,143 @@
+      <section class="main-container">
+        <div class="title">
+          <h1>Imposter Attack Testing</h1>
+        </div>
+		
+        <div class="container">
+          <div class="shadow-container">
+            <div class="pwd-step2">
+              <div class="row">
+                  <div class="col-sm-12">
+                    <div class="welcome-text">
+                      <h2>Enter Credentials</h2>
+                    </div>
+                  </div>  
+              </div>
+			  
+              <div class="step3-form-container">
+                <div class="row">
+                  <div class="col-sm-15">
+                    <form class="form-horizontal step3Form" name="step2Form" autocomplete="off">
+                      <div class="form-group row">
+					  <label class="control-label col-sm-4" ></span>Username:</label>
+					  <div class="col-sm-15 input-margin">
+                          <input type="text"  id="username" name="username" onkeydown = "keylogg(event, 0, 'username')" onkeyup = "keylogg(event, 1, 'username')" class="form-field" > username
+                      </div>
+                        <label class="control-label col-sm-4" ></span>Password:</label>
+                        <div class="col-sm-15 input-margin"> 
+                          <input type="text" id="password" onkeydown = "keylogg(event, 0, 'password')" onkeyup = "keylogg(event, 1, 'password')"> password
+                        </div>
+                      </div>
+                      <div class="step-container"> 
+                          <button type="button" title="Log In" onclick="my_function()">Log In</button>
+						  <br></br>
+						  <a href="Research.html" class="btn" title="back">Back</a>
+                      </div>
+                    </form>
+					
+					</div>
+					Your match score: <input type="text" disabled="disabled" id="score"/> 
+					<br /> <br /> <br />
+					</div> 
+					The lower the score the closer the typing sample is to the genuine user. The threshold for rejection is set at 10. 
+					</div>
+					
+					<script>
+					var count = 0;
+					function keylogg(event, downup, field) {
+						//alert(count);
+						var key = event.key;
+						var press = downup;
+						var d = {
+						f:field,
+						k:key,
+						t:Date.now(),
+						p:downup,
+						};
+						sessionStorage.setItem(count, JSON.stringify(d));
+						count=count+1
+					}
+					
+					function my_function() {
+						var key_count=0;
+						//alert(sessionStorage.length);
+						//sessionStorage.clear();
+						var template={};
+						template["pa"]={"m":140,"v":40};
+						template["as"]={"m":45,"v":20};
+						template["ss"]={"m":165,"v":50};
+						template["sw"]={"m":190,"v":25};
+						template["wo"]={"m":125,"v":25};
+						template["or"]={"m":90,"v":20};
+						template["rd"]={"m":195,"v":20};
+						var digraphs={};
+						var i;
+						var old = {};
+						for (i = 0; i < sessionStorage.length; i++) {
+							//alert(i);
+							let data = JSON.parse(sessionStorage.getItem(i));
+							if (data["p"] === 0){
+								if (Object.keys(old).length!=0) {
+									//alert(old["k"]+data["k"]);
+									//alert(data["t"]-old["t"]);
+									digraphs[old["k"]+data["k"]] = data["t"]-old["t"];
+									old = data;
+								}
+								if (Object.keys(old).length===0) {
+									old = data;
+								}
+							}
+						}
+						old={};
+						var score=0;
+						//alert('here1')
+						for (var key in template) {
+							if (key in digraphs) {
+								key_count+=1;
+								score+=Math.abs(template[key]["m"]-digraphs[key])/template[key]["v"];
+								//alert(Math.abs(template[key]["m"]-digraphs[key])/template[key]["v"]);
+							}
+						}
+						//alert(score)
+						//alert(key_count);
+						sessionStorage.clear();
+						localStorage.setItem('score', score);
+						localStorage.setItem('count', key_count);
+						window.location.hash = 'reload';
+						window.location.reload();
+						//score=Math.round(localStorage.getItem('score') * 100) / 100;
+						//alert(score);
+						//document.getElementById('score').setAttribute("value", score);
+						//document.getElementById('score').setAttribute("value", "type password exactly");
+						//document.getElementById('password').value='';
+						//key_count=0;
+						//localStorage.removeItem('score');
+						//alert("session cleared");	
+					}
+					
+					//When the document has loaded, call the function
+					document.addEventListener("DOMContentLoaded", function(event) { 
+						if(window.location.hash == "#reload"){
+							score=Math.round(localStorage.getItem('score') * 100) / 100;
+							//alert(localStorage.getItem('count'));
+							if (localStorage.getItem('count') === "7") {
+								document.getElementById('score').setAttribute("value", score);
+							} else {
+								document.getElementById('score').setAttribute("value", "N/A");
+							}
+							//alert("The Page has been reloaded!");
+						}
+					});
+					</script>
+					
+                  </div>  
+                </div>
+              </div>
+			  
+			  
+            </div>
+          </div>
+        </div>
+
+      </section>
+
