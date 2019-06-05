@@ -1,45 +1,43 @@
-      <section class="main-container">
+<!doctype html>
+<html>
+      <section class="container">
         <div class="title">
           <h1>Imposter Attack Testing</h1>
         </div>
 		
         <div class="container">
-          <div class="shadow-container">
+          <div class="container">
             <div class="pwd-step2">
               <div class="row">
                   <div class="col-sm-12">
-                    <div class="welcome-text">
-                      <h2>Enter Credentials</h2>
-                    </div>
                   </div>  
               </div>
-			  
+			  Enter "password" in the password field.
+			  <br /> <br />
               <div class="step3-form-container">
                 <div class="row">
                   <div class="col-sm-15">
                     <form class="form-horizontal step3Form" name="step2Form" autocomplete="off">
                       <div class="form-group row">
-					  <label class="control-label col-sm-4" ></span>Username:</label>
-					  <div class="col-sm-15 input-margin">
-                          <input type="text"  id="username" name="username" onkeydown = "keylogg(event, 0, 'username')" onkeyup = "keylogg(event, 1, 'username')" class="form-field" > username
-                      </div>
                         <label class="control-label col-sm-4" ></span>Password:</label>
                         <div class="col-sm-15 input-margin"> 
-                          <input type="text" id="password" onkeydown = "keylogg(event, 0, 'password')" onkeyup = "keylogg(event, 1, 'password')"> password
+                          <input type="text" id="password" onkeydown = "keylogg(event, 0, 'password')" onkeyup = "keylogg(event, 1, 'password')">
+						  <button type="button" title="Log In" onclick="my_function()">Log In</button>
+						  <br /> <br /> 
                         </div>
                       </div>
-                      <div class="step-container"> 
-                          <button type="button" title="Log In" onclick="my_function()">Log In</button>
-						  <br></br>
-						  <a href="Research.html" class="btn" title="back">Back</a>
-                      </div>
                     </form>
-					
 					</div>
-					Your match score: <input type="text" disabled="disabled" id="score"/> 
+					Your match score: <input type="text" disabled="disabled" id="score"/>
+					<br /> <br /> 
+					<button type="button" onclick="window.location.href = 'Research.html';" title="back">Go Back</button>
 					<br /> <br /> <br />
 					</div> 
-					The lower the score the closer the typing sample is to the genuine user. The threshold for rejection is set at 10. 
+					The lower the score the closer the typing sample is to the genuine user. If the score is "N/A" the password was not typed in correctly.
+					<br /> 
+					A higher match score means the keystrokes were more dissimilar from my template. The current threshold is set at 10. 
+					<br /> 
+					When I enter "password" my match score is usually between 3-7. Can you beat the system?
 					</div>
 					
 					<script>
@@ -101,8 +99,12 @@
 						//alert(score)
 						//alert(key_count);
 						sessionStorage.clear();
+						var valid = document.getElementById("password").value;
+						
+						localStorage.setItem('valid',valid);
 						localStorage.setItem('score', score);
 						localStorage.setItem('count', key_count);
+						
 						window.location.hash = 'reload';
 						window.location.reload();
 						//score=Math.round(localStorage.getItem('score') * 100) / 100;
@@ -120,8 +122,12 @@
 						if(window.location.hash == "#reload"){
 							score=Math.round(localStorage.getItem('score') * 100) / 100;
 							//alert(localStorage.getItem('count'));
-							if (localStorage.getItem('count') === "7") {
-								document.getElementById('score').setAttribute("value", score);
+							if (localStorage.getItem('count') === "7" && localStorage.getItem('valid')==="password") {
+								if (score<10) {
+									document.getElementById('score').setAttribute("value", score+"     access granted");
+								} else {
+								document.getElementById('score').setAttribute("value", score+"     access denied");
+								}
 							} else {
 								document.getElementById('score').setAttribute("value", "N/A");
 							}
@@ -140,4 +146,4 @@
         </div>
 
       </section>
-
+<html>
