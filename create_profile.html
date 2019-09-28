@@ -2,7 +2,7 @@
 <html>
       <section class="container">
         <div class="title">
-          <h1>Imposter Attack Testing</h1>
+          <h1>Profile Creation</h1>
         </div>
 		
         <div class="container">
@@ -12,7 +12,7 @@
                   <div class="col-sm-12">
                   </div>  
               </div>
-			  Enter "password" in the password field.
+			  Enter "password" in the password field. Alerts will be displayed providing the digraph times.
 			  <br /> <br />
               <div class="step3-form-container">
                 <div class="row">
@@ -27,18 +27,6 @@
                         </div>
                       </div>
                     </form>
-					</div>
-					Your match score: <input type="text" disabled="disabled" id="score"/>
-					<br /> <br /> 
-					<button type="button" onclick="window.location.href = 'Research.html';" title="back">Go Back</button>
-					<br /> <br /> <br />
-					</div> 
-					The lower the score the closer the typing sample is to the genuine user. If the score is "N/A" the password was not typed in correctly.
-					<br /> 
-					A higher match score means the keystrokes were more dissimilar from my template. The current threshold is set at 10. 
-					<br /> 
-					When I enter "password" my match score is usually between 2-5. Can you beat the system?
-					</div>
 					
 					<script>
 					var count = 0;
@@ -61,20 +49,13 @@
 						//alert(sessionStorage.length);
 						//sessionStorage.clear();
 						var template={};
-						//template["pa"]={"m":140,"v":40};
-						//template["as"]={"m":45,"v":20};
-						//template["ss"]={"m":165,"v":50};
-						//template["sw"]={"m":190,"v":25};
-						//template["wo"]={"m":125,"v":25};
-						//template["or"]={"m":90,"v":20};
-						//template["rd"]={"m":195,"v":20};
-						template["pa"]={"m":60,"v":30};
-						template["as"]={"m":45,"v":30};
-						template["ss"]={"m":130,"v":40};
-						template["sw"]={"m":160,"v":25};
-						template["wo"]={"m":75,"v":40};
-						template["or"]={"m":110,"v":30};
-						template["rd"]={"m":170,"v":20};
+						template["pa"]={"m":140,"v":40};
+						template["as"]={"m":45,"v":20};
+						template["ss"]={"m":165,"v":50};
+						template["sw"]={"m":190,"v":25};
+						template["wo"]={"m":125,"v":25};
+						template["or"]={"m":90,"v":20};
+						template["rd"]={"m":195,"v":20};
 						var digraphs={};
 						var i;
 						var old = {};
@@ -83,8 +64,8 @@
 							let data = JSON.parse(sessionStorage.getItem(i));
 							if (data["p"] === 0){
 								if (Object.keys(old).length!=0) {
-									//alert(old["k"]+data["k"]);
-									//alert(data["t"]-old["t"]);
+									alert(old["k"]+data["k"]);
+									alert(data["t"]-old["t"]);
 									digraphs[old["k"]+data["k"]] = data["t"]-old["t"];
 									old = data;
 								}
